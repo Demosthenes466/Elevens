@@ -1,13 +1,16 @@
 /**
  * This class provides a convenient way to test shuffling methods.
  */
+import java.util.List;
+import java.util.ArrayList;
+
 public class Shuffler {
 
 	/**
 	 * The number of consecutive shuffle steps to be performed in each call
 	 * to each sorting procedure.
 	 */
-	private static final int SHUFFLE_COUNT = 1;
+	private static final int SHUFFLE_COUNT = 50;
 
 
 	/**
@@ -17,7 +20,7 @@ public class Shuffler {
 	public static void main(String[] args) {
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive perfect shuffles:");
-		int[] values1 = {0, 1, 2, 3};
+		int[] values1 = {0, 1, 2, 3, 4};
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
 			perfectShuffle(values1);
 			System.out.print("  " + j + ":");
@@ -30,7 +33,7 @@ public class Shuffler {
 
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive efficient selection shuffles:");
-		int[] values2 = {0, 1, 2, 3};
+		int[] values2 = {0, 1, 2, 3, 4};
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
 			selectionShuffle(values2);
 			System.out.print("  " + j + ":");
@@ -50,7 +53,25 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void perfectShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int[] shuffled = new int[values.length];
+		int k = 0;
+
+		for(int j = 0; j < (values.length+1)/2; j ++) {
+			shuffled[k] = values[j];
+			k = k + 2;
+		}
+
+		k = 1;
+
+		for(int h = (values.length+1)/2; h < values.length; h++) {
+			shuffled[k] = values[h];
+			k = k + 2;
+		}
+
+
+		for(int l = 0; l < values.length; l++) {
+			values[l] = shuffled[l];
+		}
 	}
 
 	/**
@@ -65,6 +86,24 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void selectionShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		List<Integer> notPicked = new ArrayList<Integer>();
+		List<Integer> picked = new ArrayList<Integer>();
+    int r = 0;
+
+		for(int l = 0; l < values.length; l++) {
+			notPicked.add(l);
+		}
+
+		for(int k = notPicked.size(); k > 0; k --) {
+			r = (int) (Math.random() * notPicked.size());
+			picked.add(notPicked.get(r));
+			notPicked.remove(r);
+		}
+
+		for(int l = 0; l < picked.size(); l++) {
+			values[l] = picked.get(l);
+		}
 	}
+
+
 }
