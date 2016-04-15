@@ -18,31 +18,33 @@ public class Shuffler {
 	 * @param args is not used.
 	 */
 	public static void main(String[] args) {
-		System.out.println("Results of " + SHUFFLE_COUNT +
-								 " consecutive perfect shuffles:");
-		int[] values1 = {0, 1, 2, 3, 4};
-		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
-			perfectShuffle(values1);
-			System.out.print("  " + j + ":");
-			for (int k = 0; k < values1.length; k++) {
-				System.out.print(" " + values1[k]);
-			}
-			System.out.println();
-		}
-		System.out.println();
+		// System.out.println("Results of " + SHUFFLE_COUNT +
+		// 						 " consecutive perfect shuffles:");
+		// int[] values1 = {0, 1, 2, 3, 4};
+		// for (int j = 1; j <= SHUFFLE_COUNT; j++) {
+		// 	perfectShuffle(values1);
+		// 	System.out.print("  " + j + ":");
+		// 	for (int k = 0; k < values1.length; k++) {
+		// 		System.out.print(" " + values1[k]);
+		// 	}
+		// 	System.out.println();
+		// }
+		// System.out.println();
 
-		System.out.println("Results of " + SHUFFLE_COUNT +
-								 " consecutive efficient selection shuffles:");
-		int[] values2 = {0, 1, 2, 3, 4};
-		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
-			selectionShuffle(values2);
-			System.out.print("  " + j + ":");
-			for (int k = 0; k < values2.length; k++) {
-				System.out.print(" " + values2[k]);
-			}
-			System.out.println();
-		}
-		System.out.println();
+		// System.out.println("Results of " + SHUFFLE_COUNT +
+		// 						 " consecutive efficient selection shuffles:");
+		// int[] values2 = {0, 1, 2, 3, 4};
+		// for (int j = 1; j <= SHUFFLE_COUNT; j++) {
+		// 	selectionShuffle(values2);
+		// 	System.out.print("  " + j + ":");
+		// 	for (int k = 0; k < values2.length; k++) {
+		// 		System.out.print(" " + values2[k]);
+		// 	}
+		// 	System.out.println();
+		// }
+		// System.out.println();
+
+		System.out.println(arePermutations({1,2,3,4}, {4,3,2,1}));
 	}
 
 
@@ -104,6 +106,22 @@ public class Shuffler {
 			values[l] = picked.get(l);
 		}
 	}
+
+	public static boolean arePermutations(int[] a, int[] b) {
+		int correct = 0;
+			for(int j = 0; j < a.length; j ++) {
+				for(int k = 0; k < b.length; k ++) {
+					if (a[j] == b[k]) {
+						correct ++;
+					}
+				}
+			}
+			if (correct == a.length + 1) {
+				return true;
+			}
+
+			return false;
+		}
 
 
 }
