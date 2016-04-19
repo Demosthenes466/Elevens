@@ -62,7 +62,26 @@ public class Deck {
 	 * and reset the size to represent the entire deck.
 	 */
 	public void shuffle() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+
+		List<Card> notPicked = new ArrayList<Card>();
+		List<Card> picked = new ArrayList<Card>();
+    int r = 0;
+
+		for(int l = 0; l < cards.size(); l++) {
+			notPicked.add(cards.get(l));
+		}
+
+		for(int k = notPicked.size(); k > 0; k --) {
+			r = (int) (Math.random() * notPicked.size());
+			picked.add(notPicked.get(r));
+			notPicked.remove(r);
+		}
+		cards.clear();
+		for(int j = 0; j < picked.size(); j ++) {
+			cards.add(picked.get(j));
+		}
+
+		size = cards.size();
 	}
 
 	/**
@@ -113,4 +132,6 @@ public class Deck {
 		rtn = rtn + "\n";
 		return rtn;
 	}
+
+	
 }
