@@ -9,7 +9,7 @@ public class ElevensBoard extends Board {
 	/**
 	 * The size (number of cards) on the board.
 	 */
-	private static final int BOARD_SIZE = 9;
+	private static final int BOARD_SIZE = 52;
 
 	/**
 	 * The ranks of the cards for this game to be sent to the deck.
@@ -35,6 +35,7 @@ public class ElevensBoard extends Board {
 	private static final boolean I_AM_DEBUGGING = false;
 
 
+
 	/**
 	 * Creates a new <code>ElevensBoard</code> instance.
 	 */
@@ -53,7 +54,7 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		return (containsPairSum11(selectedCards) ^ containsJQK(selectedCards));
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean anotherPlayIsPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		return (containsPairSum11(cardIndexes()) || containsJQK(cardIndexes()));
 	}
 
 	/**
@@ -78,7 +79,14 @@ public class ElevensBoard extends Board {
 	 *              contain an 11-pair; false otherwise.
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		for(int j = 0; j < selectedCards.size(); j ++) {
+			for(int i = 0; i < selectedCards.size(); i++) {
+				if(cardAt(selectedCards.get(i)).pointValue() + cardAt(selectedCards.get(j)).pointValue() == 11 ){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -90,6 +98,14 @@ public class ElevensBoard extends Board {
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		boolean king = false;
+		boolean queen = false;
+		boolean jack = false;
+		for(int index : selectedCards) {
+			if(cardAt(index).rank() == "jack") jack = true;
+			if(cardAt(index).rank() == "queen") queen = true;
+			if(cardAt(index).rank() == "king") king = true;
+		}
+		return king && queen && jack;
 	}
 }
